@@ -14,5 +14,5 @@ This is a react todo app demostrating the CRUD Operations. Key concepts here is 
 1. Clone it
 2. Run ***npm install***
 3. Run ***npm start***
-4. Wait it will open on the default port 3000, or once it is done you can open it on [Visit Localhost link http://localhost:3000](http://localhost:3000)
+4. Wait it will open on the default port 3000, or once it is done you can open it on [http://localhost:3000](http://localhost:3000)
 
