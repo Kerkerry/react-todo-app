@@ -42,7 +42,8 @@ body {
   padding-bottom: 20px;
 }
 
-.add-todo-form input[type="text"] {
+.add-todo-form input[type="text"],
+.add-todo-form .form-select /* Apply to all select elements with this class */ {
   padding: 12px 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -50,12 +51,25 @@ body {
   outline: none;
   transition: border-color 0.3s ease;
   width: calc(100% - 30px); /* Adjust for padding */
+  box-sizing: border-box; /* Crucial for consistent width with padding */
 }
 
-.add-todo-form input[type="text"]:focus {
+.add-todo-form input[type="text"]:focus,
+.add-todo-form .form-select:focus {
   border-color: #4CAF50; /* Green highlight on focus */
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
 }
+
+/* Specific styling for select elements */
+.add-todo-form .form-select {
+  background-color: white; /* Ensure consistent background */
+  appearance: none; /* Remove default arrow on some browsers */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2C197.398L154.598%2C64.996c-3.8-3.8-10.2-3.8-14%2C0L5.402%2C197.398c-3.8%2C3.8-3.8%2C10.2%2C0%2C14l7%2C7c3.8%2C3.8%2C10.2%2C3.8%2C14%2C0l124.996-124.996c3.8-3.8%2C10.2-3.8%2C14%2C0l124.996%2C124.996c3.8%2C3.8%2C10.2%2C3.8%2C14%2C0l7-7C290.8%2C207.598%2C290.8%2C201.198%2C287%2C197.398z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow for dropdown */
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 10px;
+}
+
 
 .add-todo-form button {
   padding: 12px 20px;
@@ -190,7 +204,8 @@ body {
     flex-wrap: wrap; /* Allow wrapping if space is tight */
   }
 
-  .add-todo-form input[type="text"] {
+  .add-todo-form input[type="text"],
+  .add-todo-form .form-select { /* Include select elements in responsive layout */
     flex-grow: 1; /* Allow inputs to grow */
     width: auto; /* Reset width */
   }
