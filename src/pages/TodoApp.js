@@ -62,7 +62,7 @@ const TodoApp=()=>{
     }
 
     return (
-        <div className="todo-container"> {/* Apply main container class */}
+    <div className="todo-container">
       <h1>My Session-Persisted Todos</h1>
 
       <form className="add-todo-form" onSubmit={handSubmit}>
