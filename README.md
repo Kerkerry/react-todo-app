@@ -1,4 +1,4 @@
-# Todo Application
+# React Todo Application
 This is a react todo app demostrating the CRUD Operations. Key concepts here is to know how to use react hooks
 
 
