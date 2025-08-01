@@ -141,9 +141,10 @@ const TodoApp=()=>{
                 Due: {todo.dueDate} | Priority: {todo.priority} | Category: {todo.category}
               </span>
             </div>
-            <button onClick={() => toggleTodoCompletion(todo.id)}>
+            {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
-            </button>
+            </button> */}
+            <input type="checkbox" className="todo-checkbox" checked={todo.isCompleted} onChange={() => toggleTodoCompletion(todo.id)}/>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
