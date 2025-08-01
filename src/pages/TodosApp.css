@@ -1,0 +1,215 @@
+/* General Body Styles */
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f4f7f6; /* Light grey background */
+  color: #333; /* Darker text for readability */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Center the whole app */
+  min-height: 100vh; /* Full viewport height */
+  box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Main Container for the Todo App */
+.todo-container {
+  background-color: #ffffff; /* White background for the app */
+  border-radius: 12px; /* Slightly rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Soft shadow */
+  padding: 30px;
+  width: 100%;
+  max-width: 600px; /* Max width for larger screens */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Header */
+.todo-container h1 {
+  text-align: center;
+  color: #2c3e50; /* Dark blue/grey for heading */
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  font-weight: 600;
+}
+
+/* Add Task Form */
+.add-todo-form {
+  display: flex;
+  flex-direction: column; /* Stack inputs vertically on small screens */
+  gap: 15px; /* Space between inputs */
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.add-todo-form input[type="text"] {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: calc(100% - 30px); /* Adjust for padding */
+}
+
+.add-todo-form input[type="text"]:focus {
+  border-color: #4CAF50; /* Green highlight on focus */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.add-todo-form button {
+  padding: 12px 20px;
+  background-color: #4CAF50; /* Green button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.add-todo-form button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-1px);
+}
+
+.add-todo-form button:active {
+  transform: translateY(0);
+}
+
+
+/* Todo List */
+.todo-list {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  gap: 10px; /* Space between elements */
+}
+
+.todo-item:last-child {
+  border-bottom: none; /* No border for the last item */
+}
+
+.todo-item-content {
+  flex-grow: 1; /* Allows content to take up available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-item-name {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.todo-item-description {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.todo-item-meta {
+  font-size: 0.8em;
+  color: #999;
+}
+
+/* Completed Todo Item Styling */
+.todo-item.completed .todo-item-name,
+.todo-item.completed .todo-item-description,
+.todo-item.completed .todo-item-meta {
+  text-decoration: line-through;
+  color: #b0b0b0; /* Lighter color for completed tasks */
+}
+
+/* Priority Indicators (Optional but nice) */
+.todo-item[data-priority="High"] .todo-item-name {
+  color: #e74c3c; /* Red for high priority */
+}
+.todo-item[data-priority="Medium"] .todo-item-name {
+  color: #f39c12; /* Orange for medium priority */
+}
+.todo-item[data-priority="Low"] .todo-item-name {
+  color: #2ecc71; /* Green for low priority (or just default) */
+}
+
+
+/* Action Buttons within Todo Item */
+.todo-item button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+.todo-item button:nth-of-type(1) { /* Complete/Unmark button */
+  background-color: #2196F3; /* Blue */
+  color: white;
+}
+
+.todo-item button:nth-of-type(1):hover {
+  background-color: #1976D2; /* Darker blue */
+}
+
+.todo-item button:nth-of-type(2) { /* Delete button */
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.todo-item button:nth-of-type(2):hover {
+  background-color: #d32f2f; /* Darker red */
+}
+
+/* Optional: Info text at the bottom */
+.info-text {
+  text-align: center;
+  font-size: 0.85em;
+  color: #888;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed #eee;
+}
+
+/* Responsive adjustments */
+@media (min-width: 480px) {
+  .add-todo-form {
+    flex-direction: row; /* Inputs side-by-side on wider screens */
+    flex-wrap: wrap; /* Allow wrapping if space is tight */
+  }
+
+  .add-todo-form input[type="text"] {
+    flex-grow: 1; /* Allow inputs to grow */
+    width: auto; /* Reset width */
+  }
+
+  .add-todo-form button {
+    width: auto; /* Button fits content */
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-item {
+    flex-wrap: wrap; /* Wrap content and buttons on very small screens */
+    padding-bottom: 10px; /* Less padding on small screens */
+  }
+  .todo-item button {
+    width: 100%; /* Full width buttons on very small screens */
+    margin-top: 5px; /* Space between buttons */
+  }
+  .todo-item-content {
+    width: 100%; /* Ensure content takes full width when wrapped */
+  }
+}
