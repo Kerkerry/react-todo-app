@@ -71,7 +71,7 @@ const TodoApp=()=>{
 
     return (
     <div className="todo-container">
-      <h1>My Session-Persisted Todos</h1>
+      <h1>All Todos Currently</h1>
 
       <form className="add-todo-form" onSubmit={(e) => {
         e.preventDefault();
