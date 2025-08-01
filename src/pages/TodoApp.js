@@ -22,9 +22,7 @@ const TodoApp=()=>{
         }
     },[todos])
 
-    const addTodo=(taskName,description)=>{
-        console.log({taskName,description});
-        
+    const addTodo=(taskName,description)=>{       
         const newTodo = {
             id: String(todos.length + 1),
             taskName,
