@@ -113,6 +113,37 @@ body {
   border-bottom: none; /* No border for the last item */
 }
 
+/* NEW: Style for the checkbox */
+.todo-checkbox {
+  width: 20px; /* Standardize size */
+  height: 20px; /* Standardize size */
+  cursor: pointer;
+  flex-shrink: 0; /* Prevent it from shrinking */
+  margin-right: 5px; /* Add a small space to its right */
+  /* Basic custom checkbox styling (optional, browser default is fine) */
+  appearance: none; /* Remove default styling */
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  position: relative; /* For custom checkmark */
+}
+
+.todo-checkbox:checked {
+  background-color: #4CAF50; /* Green when checked */
+  border-color: #4CAF50;
+}
+
+.todo-checkbox:checked::after {
+  content: '✔'; /* Unicode checkmark */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  line-height: 1; /* For better vertical alignment */
+}
+
 .todo-item-content {
   flex-grow: 1; /* Allows content to take up available space */
   display: flex;

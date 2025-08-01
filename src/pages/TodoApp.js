@@ -71,7 +71,7 @@ const TodoApp=()=>{
 
     return (
     <div className="todo-container">
-      <h1>My Session-Persisted Todos</h1>
+      <h1>All Todos Currently</h1>
 
       <form className="add-todo-form" onSubmit={(e) => {
         e.preventDefault();
@@ -141,9 +141,10 @@ const TodoApp=()=>{
                 Due: {todo.dueDate} | Priority: {todo.priority} | Category: {todo.category}
               </span>
             </div>
-            <button onClick={() => toggleTodoCompletion(todo.id)}>
+            {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
-            </button>
+            </button> */}
+            <input type="checkbox" className="todo-checkbox" checked={todo.isCompleted} onChange={() => toggleTodoCompletion(todo.id)}/>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
