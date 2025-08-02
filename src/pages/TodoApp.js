@@ -1,18 +1,7 @@
-import { useState,useEffect } from "react"
-import initialTodos from "./TodosData"
+import { useState } from "react"
 import './TodosApp.css'
-const TodoApp=()=>{
-    const [todos,setTodos]=useState(
-        ()=>{
-            try {
-                const storedTodos=sessionStorage.getItem('myTodos')
-                return storedTodos?JSON.parse(storedTodos):initialTodos
-            } catch (error) {
-                console.error("Error parsing session storage data:", error);
-                return initialTodos; 
-            }
-        }
-    )
+const TodoApp=({todos, addTodo, toggleTodoCompletion, deleteTodo })=>{
+
 
     const [newTodoTaskName, setNewTodoTaskName] = useState('');
     const [newTodoDescription, setNewTodoDescription] = useState('');
@@ -20,60 +9,8 @@ const TodoApp=()=>{
     const [newTodoCategory, setNewTodoCategory] = useState('General'); // NEW STATE: Default to General
 
 
-    useEffect(()=>{
-        try {
-            sessionStorage.setItem('myTodos',JSON.stringify(initialTodos))
-        } catch (error) {
-            console.error("Error saving to session storage:", error);
-        }
-    },[todos])
-
-    const addTodo=(taskName,description, priority, category)=>{       
-        const newTodo = {
-            id: String(todos.length + 1),
-            taskName,
-            description,
-            isCompleted: false,
-            dueDate: new Date().toISOString().slice(0, 10),
-            priority: priority,
-            category:category,
-            tags: []
-        };
-
-        setTodos([...todos,newTodo])
-    }
-
-    const toggleTodoCompletion=(id)=>{
-        setTodos(todos.map(todo=>
-            todo.id===id?{...todo, isCompleted:!todo.isCompleted}:todo
-        ));
-    }
-
-    const deleteTodo=(id)=>{
-        setTodos(todos.filter(todo=>todo.id!==id));
-    }
     
     const handSubmit=(e)=>{
-        e.preventDefault()
-        const taskInput = e.target.elements.taskName;
-        const descInput = e.target.elements.description;
-        console.log(taskInput.value);
-        if(taskInput.value.trim()){
-            addTodo(taskInput.value.trim(), descInput.value.trim())
-            taskInput.value=''
-            descInput.value=''
-        }
-    }
-
-    // Define available options
-    const priorityOptions = ['High', 'Medium', 'Low'];
-    const categoryOptions = ['General', 'Work', 'Personal', 'Shopping', 'Health', 'Learning']; // NEW: Categories
-
-    return (
-    <div className="todo-container">
-      <h1>My Session-Persisted Todos</h1>
-
-      <form className="add-todo-form" onSubmit={(e) => {
         e.preventDefault();
         if (newTodoTaskName.trim()) { // Check if task name is not empty
           // MODIFIED: Pass all form states to addTodo
@@ -84,7 +21,17 @@ const TodoApp=()=>{
           setNewTodoPriority('Medium');
           setNewTodoCategory('General');
         }
-      }}>
+    }
+
+    // Define available options
+    const priorityOptions = ['High', 'Medium', 'Low'];
+    const categoryOptions = ['General', 'Work', 'Personal', 'Shopping', 'Health', 'Learning']; // NEW: Categories
+
+    return (
+    <div className="todo-container">
+      <h1>All Todos Currently</h1>
+
+      <form className="add-todo-form" onSubmit={handSubmit}>
         <input
           name="taskName"
           type="text"
@@ -141,9 +88,10 @@ const TodoApp=()=>{
                 Due: {todo.dueDate} | Priority: {todo.priority} | Category: {todo.category}
               </span>
             </div>
-            <button onClick={() => toggleTodoCompletion(todo.id)}>
+            {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
-            </button>
+            </button> */}
+            <input type="checkbox" className="todo-checkbox" checked={todo.isCompleted} onChange={() => toggleTodoCompletion(todo.id)}/>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
