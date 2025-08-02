@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import initialTodos from "./TodosData"
+import initialTodos from "./data/TodosData"
 import './TodosApp.css'
 const TodoApp=()=>{
     const [todos,setTodos]=useState(
@@ -54,14 +54,15 @@ const TodoApp=()=>{
     }
     
     const handSubmit=(e)=>{
-        e.preventDefault()
-        const taskInput = e.target.elements.taskName;
-        const descInput = e.target.elements.description;
-        console.log(taskInput.value);
-        if(taskInput.value.trim()){
-            addTodo(taskInput.value.trim(), descInput.value.trim())
-            taskInput.value=''
-            descInput.value=''
+        e.preventDefault();
+        if (newTodoTaskName.trim()) { // Check if task name is not empty
+          // MODIFIED: Pass all form states to addTodo
+          addTodo(newTodoTaskName.trim(), newTodoDescription.trim(), newTodoPriority, newTodoCategory);
+          // Reset form fields
+          setNewTodoTaskName('');
+          setNewTodoDescription('');
+          setNewTodoPriority('Medium');
+          setNewTodoCategory('General');
         }
     }
 
@@ -73,18 +74,7 @@ const TodoApp=()=>{
     <div className="todo-container">
       <h1>All Todos Currently</h1>
 
-      <form className="add-todo-form" onSubmit={(e) => {
-        e.preventDefault();
-        if (newTodoTaskName.trim()) { // Check if task name is not empty
-          // MODIFIED: Pass all form states to addTodo
-          addTodo(newTodoTaskName.trim(), newTodoDescription.trim(), newTodoPriority, newTodoCategory);
-          // Reset form fields
-          setNewTodoTaskName('');
-          setNewTodoDescription('');
-          setNewTodoPriority('Medium');
-          setNewTodoCategory('General');
-        }
-      }}>
+      <form className="add-todo-form" onSubmit={handSubmit}>
         <input
           name="taskName"
           type="text"

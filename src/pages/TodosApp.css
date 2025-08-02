@@ -228,6 +228,49 @@ body {
   border-top: 1px dashed #eee;
 }
 
+/* Main Navigation Container */
+.main-nav {
+  background-color: #2c3e50; /* Dark blue/grey, matches your heading color */
+  padding: 15px 0; /* Vertical padding */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%;
+}
+
+/* List within Navigation */
+.main-nav ul {
+  list-style: none; /* Remove bullet points */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Makes list items go horizontal */
+  justify-content: center; /* Center the links horizontally */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 30px; /* Space between list items */
+}
+
+/* List Items */
+.main-nav li {
+  margin: 0; /* Reset default margins */
+}
+
+/* Link Styling */
+.main-nav a {
+  text-decoration: none; /* Remove underline */
+  color: #ecf0f1; /* Light grey/white text */
+  font-size: 1.1em;
+  font-weight: 500;
+  padding: 8px 15px; /* Padding inside the links */
+  border-radius: 6px; /* Slightly rounded corners for links */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for hover */
+  white-space: nowrap; /* Prevent links from breaking into multiple lines */
+}
+
+/* Link Hover and Focus States */
+.main-nav a:hover,
+.main-nav a:focus {
+  background-color: #4CAF50; /* Green highlight on hover/focus (matches your add button) */
+  color: white; /* Ensure text remains white on hover */
+}
+
 /* Responsive adjustments */
 @media (min-width: 480px) {
   .add-todo-form {
@@ -257,5 +300,17 @@ body {
   }
   .todo-item-content {
     width: 100%; /* Ensure content takes full width when wrapped */
+  }
+
+   .main-nav ul {
+    flex-direction: column; /* Stack links vertically on smaller screens */
+    align-items: center; /* Center links horizontally when stacked */
+    gap: 15px; /* Less space when stacked */
+  }
+
+  .main-nav a {
+    width: 80%; /* Make links wider when stacked */
+    text-align: center; /* Center text within wider links */
+    padding: 12px 15px; /* More padding for easier tapping */
   }
 }
