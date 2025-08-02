@@ -6,13 +6,13 @@ const Layout=()=>{
             <nav className="main-nav">
                 <ul>
                     <li>
-                        <Link to='/'>All Todos</Link> 
+                        <Link to='/' className={({ isActive }) => isActive ? 'active' : ''}>All Todos</Link> 
                     </li> 
                     <li>
-                        <Link to='/complete-todos'>Completed Todos</Link>
+                        <Link to='/complete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Completed Todos</Link>
                     </li>
                     <li>
-                        <Link to='/incomplete-todos'>Incomplete Todos</Link>
+                        <Link to='/incomplete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Incomplete Todos</Link>
                     </li>   
                 </ul>
             </nav>

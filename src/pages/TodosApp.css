@@ -267,8 +267,16 @@ body {
 /* Link Hover and Focus States */
 .main-nav a:hover,
 .main-nav a:focus {
-  background-color: #4CAF50; /* Green highlight on hover/focus (matches your add button) */
+  background-color: #45a049; /* Darker green on hover */
   color: white; /* Ensure text remains white on hover */
+}
+
+/* NEW: Active link styling (requires NavLink in JSX) */
+.main-nav a.active {
+  background-color: #3498db; /* A distinct blue for the active link */
+  color: white;
+  font-weight: 600; /* Make it a bit bolder */
+  box-shadow: 0 0 0 2px #3498db; /* Subtle outline */
 }
 
 /* Responsive adjustments */

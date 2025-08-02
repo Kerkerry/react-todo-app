@@ -1,36 +1,11 @@
-import { useState,useEffect } from "react"
-import initialTodos from "./data/TodosData"
+
 import './TodosApp.css'
-const InCompletedTodos=()=>{
-    const [todos,setTodos]=useState(
-        ()=>{
-            try {
-                const storedTodos=sessionStorage.getItem('myTodos')
-                const allTodos= storedTodos?JSON.parse(storedTodos):initialTodos
-                return allTodos;
-            } catch (error) {
-                console.error("Error parsing session storage data:", error);
-                return initialTodos; 
-            }
-        }
-    )
-
-    const toggleTodoCompletion=(id)=>{
-        setTodos(todos.map(todo=>
-            todo.id===id?{...todo, isCompleted:!todo.isCompleted}:todo
-        ));
-    }
-
-    const deleteTodo=(id)=>{
-        setTodos(todos.filter(todo=>todo.id!==id));
-    }
-
-    const completedTodos=todos.filter(todo=>!todo.isCompleted)
+const InCompletedTodos=({ todos, toggleTodoCompletion, deleteTodo })=>{
     return (
     <div className="todo-container">
       <h1>Incomplete Todos</h1>
       <ul className="todo-list">
-        {completedTodos.map(todo => (
+        {todos.map(todo => (
           <li
             key={todo.id}
             className={`todo-item ${todo.isCompleted ? 'completed' : ''}`}
