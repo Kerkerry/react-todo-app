@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState } from "react"
 import './TodosApp.css'
 const TodoApp=({todos, addTodo, toggleTodoCompletion, deleteTodo })=>{
 

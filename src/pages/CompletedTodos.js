@@ -1,4 +1,3 @@
-import { useState,useEffect } from "react"
 import './TodosApp.css'
 const CompletedTodos=({ todos, toggleTodoCompletion, deleteTodo })=>{
    
