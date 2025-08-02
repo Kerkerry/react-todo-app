@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import './TodosApp.css'
 const Layout=()=>{
     return (
@@ -6,13 +6,13 @@ const Layout=()=>{
             <nav className="main-nav">
                 <ul>
                     <li>
-                        <Link to='/' className={({ isActive }) => isActive ? 'active' : ''}>All Todos</Link> 
+                        <NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>All Todos</NavLink> 
                     </li> 
                     <li>
-                        <Link to='/complete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Completed Todos</Link>
+                        <NavLink to='/complete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Completed Todos</NavLink>
                     </li>
                     <li>
-                        <Link to='/incomplete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Incomplete Todos</Link>
+                        <NavLink to='/incomplete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Incomplete Todos</NavLink>
                     </li>   
                 </ul>
             </nav>
