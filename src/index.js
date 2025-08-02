@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CompletedTodos from './pages/CompletedTodos';
 import Layout from './pages/Layout';
-import InCompleteTodos from './pages/IncompleteTodos';
+import InCompleteTodos from './pages/InCompleteTodos';
 import Page404 from './pages/404';
 import initialTodos from './pages/data/TodosData';
 
