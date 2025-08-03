@@ -6,27 +6,18 @@ import CompletedTodos from './pages/CompletedTodos';
 import Layout from './pages/Layout';
 import InCompleteTodos from './pages/InCompleteTodos';
 import Page404 from './pages/404';
-import initialTodos from './pages/data/TodosData';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
-export default function App(){
-    const [todos,setTodos]=useState(
-        ()=>{
-            try {
-                const storedTodos=sessionStorage.getItem('myTodos')
-                return storedTodos?JSON.parse(storedTodos):initialTodos
-            } catch (error) {
-                console.error("Error parsing session storage data:", error);
-                return initialTodos; 
-            }
-        }
-    )
+export default function  App(){
+    const [todos,setTodos]=useState([])
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(()=>{
-        try {
-            sessionStorage.setItem('myTodos',JSON.stringify(initialTodos))
-        } catch (error) {
-            console.error("Error saving to session storage:", error);
-        }
+          fetch('http://localhost:3100')
+                .then((res)=>res.json())
+                    .then((todos)=>setTodos(todos))
+                        .catch((e)=>console.error(`Error retrieving todos: ${e}`))
     },[todos])
 
     const addTodo=(taskName,description, priority, category)=>{       
@@ -40,27 +31,64 @@ export default function App(){
             category:category,
             tags: []
         };
-
-        setTodos([...todos,newTodo])
+        fetch(
+                'http://localhost:3100/add-todo',
+                {
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newTodo),
+                }
+            )
+                .then(res=>console.log(res))
+                    .catch(e=>console.error(e))
     }
 
     const toggleTodoCompletion=(id)=>{
-        setTodos(todos.map(todo=>
-            todo.id===id?{...todo, isCompleted:!todo.isCompleted}:todo
-        ));
+        const todoToToggle = todos.find(todo => todo.id === id);
+        if (!todoToToggle) return;
+        fetch(
+            `http://localhost:3100/toggle-todo/${id}`,
+                {
+                    method:'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ todo:JSON.stringify(todoToToggle)}), 
+                })
+                    .then(res=>console.log(res))
+                        .catch(err=>console.error(err))
     }
 
     const deleteTodo=(id)=>{
-        setTodos(todos.filter(todo=>todo.id!==id));
+        fetch(
+            `http://localhost:3100/delete-todo/${id}`,
+            {
+                method:'DELETE',
+            }
+        )
+        .then((res)=>console.log(res))
+            .catch(err=>console.error(err))
     }
+
+    // if (!isAuthenticated) {
+    //     return (
+    //     <Routes>
+    //         <Route path="/signin" element={<SignIn />} />
+    //         <Route path="/signup" element={<SignUp />} />
+    //         <Route path="*" element={<SignIn/>} />
+    //     </Routes>
+    //     );
+    // }
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<TodoApp todos={todos} addTodo={addTodo} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
-          <Route path="complete-todos" element={<CompletedTodos todos={todos.filter(todo=>todo.isCompleted)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
-          <Route path="incomplete-todos" element={<InCompleteTodos todos={todos.filter(todo=>!todo.isCompleted)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
+          <Route path="complete-todos" element={<CompletedTodos todos={todos.filter(todo=>todo.is_completed)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
+          <Route path="incomplete-todos" element={<InCompleteTodos todos={todos.filter(todo=>!todo.is_completed)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
           <Route path='*' element={<Page404/>}/>
         </Route>
       </Routes>

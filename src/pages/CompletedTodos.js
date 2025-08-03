@@ -8,20 +8,20 @@ const CompletedTodos=({ todos, toggleTodoCompletion, deleteTodo })=>{
         {todos.map(todo => (
           <li
             key={todo.id}
-            className={`todo-item ${todo.isCompleted ? 'completed' : ''}`}
+            className={`todo-item ${todo.is_completed ? 'completed' : ''}`}
             data-priority={todo.priority}
           >
             <div className="todo-item-content">
-              <span className="todo-item-name">{todo.taskName}</span>
+              <span className="todo-item-name">{todo.task_name}</span>
               {todo.description && <span className="todo-item-description">{todo.description}</span>}
               <span className="todo-item-meta">
-                Due: {todo.dueDate} | Priority: {todo.priority} | Category: {todo.category}
+                Due: {todo.due_date} | Priority: {todo.priority} | Category: {todo.category}
               </span>
             </div>
             {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
             </button> */}
-            <input type="checkbox" className="todo-checkbox" checked={todo.isCompleted} onChange={() => toggleTodoCompletion(todo.id)}/>
+            <input type="checkbox" className="todo-checkbox" checked={todo.is_completed} onChange={() => toggleTodoCompletion(todo.id)}/>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
