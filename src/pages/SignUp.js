@@ -44,7 +44,7 @@ const SignUp = () => {
           title="Create an Account"
           subtitle="Already have an account?"
           linkText="Sign In"
-          linkTo="/signin"
+          linkTo="/sign-in"
         />
         <form onSubmit={handleSignUp} className="auth-form">
           <div className="form-field-group">

@@ -38,7 +38,7 @@ const SignIn = () => {
           title="Welcome Back"
           subtitle="Don't have an account yet?"
           linkText="Sign Up"
-          linkTo="/signup"
+          linkTo="/sign-up"
         />
         <form onSubmit={handleSignIn} className="auth-form">
           <div className="form-field-group">
