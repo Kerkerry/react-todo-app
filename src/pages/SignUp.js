@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AuthHeader from "./AuthHeader";
+import './TodosApp.css'
 // --- Sign-Up Component ---
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -37,50 +38,49 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div className="auth-page-container">
+      <div className="auth-form-container">
         <AuthHeader
           title="Create an Account"
           subtitle="Already have an account?"
           linkText="Sign In"
           linkTo="/signin"
         />
-
-        <form onSubmit={handleSignUp} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email address</label>
+        <form onSubmit={handleSignUp} className="auth-form">
+          <div className="form-field-group">
+            <label className="form-label">Email address</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="form-input"
               placeholder="you@example.com"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+          <div className="form-field-group">
+            <label className="form-label">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="form-input"
               placeholder="********"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <div className="form-field-group">
+            <label className="form-label">Confirm Password</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="form-input"
               placeholder="********"
             />
           </div>
-          {message && <p className="text-sm text-center text-red-500">{message}</p>}
+          {message && <p className="error-message">{message}</p>}
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="auth-button"
           >
             Sign Up
           </button>

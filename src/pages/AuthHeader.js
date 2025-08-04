@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import './TodosApp.css'
 const AuthHeader = ({ title, subtitle, linkText, linkTo }) => (
   <div className="text-center mb-8">
     <h1 className="text-3xl font-bold text-gray-800">{title}</h1>

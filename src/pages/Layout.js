@@ -13,7 +13,13 @@ const Layout=()=>{
                     </li>
                     <li>
                         <NavLink to='/incomplete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Incomplete Todos</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/sign-in' className={({ isActive }) => isActive ? 'active' : ''}>Signin</NavLink>
                     </li>   
+                    <li>
+                        <NavLink to='/sign-up' className={({ isActive }) => isActive ? 'active' : ''}>Signup</NavLink>
+                    </li>      
                 </ul>
             </nav>
             <Outlet/>

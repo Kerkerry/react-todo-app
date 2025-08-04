@@ -84,14 +84,16 @@ export default function  App(){
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout/>}>
-          <Route index element={<TodoApp todos={todos} addTodo={addTodo} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
-          <Route path="complete-todos" element={<CompletedTodos todos={todos.filter(todo=>todo.is_completed)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
-          <Route path="incomplete-todos" element={<InCompleteTodos todos={todos.filter(todo=>!todo.is_completed)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
-          <Route path='*' element={<Page404/>}/>
-        </Route>
-      </Routes>
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+            <Route index element={<TodoApp todos={todos} addTodo={addTodo} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
+            <Route path='sign-in' element={<SignIn/>}/>
+            <Route path='sign-up' element={<SignUp/>}/>
+            <Route path="complete-todos" element={<CompletedTodos todos={todos.filter(todo=>todo.is_completed)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
+            <Route path="incomplete-todos" element={<InCompleteTodos todos={todos.filter(todo=>!todo.is_completed)} toggleTodoCompletion={toggleTodoCompletion} deleteTodo={deleteTodo}/>}/>
+            <Route path='*' element={<Page404/>}/>
+            </Route>
+        </Routes>
     </BrowserRouter>
   )
 }
