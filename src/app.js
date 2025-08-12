@@ -8,10 +8,24 @@ import TodoApp from "./pages/TodoApp";
 import CompletedTodos from "./pages/CompletedTodos";
 import InCompletedTodos from "./pages/InCompleteTodos";
 import Page404 from "./pages/404";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { api } from './AuthContext';
 
 const App = () => {
     const [todos,setTodos]=useState([])
+    const [token,setToken]=useState(()=>localStorage.getItem('token'))
+
+    const fetchTodos=async()=>{
+        try {
+           const {todos}=await api.get('/',token) 
+           setTodos(todos)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    useEffect(()=>{
+        fetchTodos()
+    },[todos])
     return (
         <Router>
             <AuthProvider>
@@ -27,7 +41,7 @@ const App = () => {
                         */}
                         <Route element={<Layout />}>
                             {/* The index route renders for /todo-app */}
-                            <Route index element={<TodoApp  data={{todos}}/>} />
+                            <Route index element={<TodoApp  todos={todos}/>} />
                             
                             {/* Note the paths are relative, e.g., /todo-app/complete-todos */}
                             <Route path="complete-todos" element={<CompletedTodos />} />

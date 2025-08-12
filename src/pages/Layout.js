@@ -1,6 +1,13 @@
 import { Outlet, NavLink } from "react-router-dom";
 import './TodosApp.css'
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
 const Layout=()=>{
+    const {signout}=useContext(AuthContext)
+
+    const handleSignOut=()=>{
+        signout()
+    }
     return (
         <>
             <nav className="main-nav">
@@ -13,6 +20,9 @@ const Layout=()=>{
                     </li>
                     <li>
                         <NavLink to='/incomplete-todos' className={({ isActive }) => isActive ? 'active' : ''}>Incomplete Todos</NavLink>
+                    </li>
+                    <li>
+                        <button onClick={handleSignOut}>Logout</button>
                     </li>    
                 </ul>
             </nav>

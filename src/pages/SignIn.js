@@ -20,7 +20,6 @@ const SignIn = () => {
     setMessage('');
      try {
       const { token } = await api.post(endpoint, { username, upassword });
-      console.log(token)
       signin(token);
       navigate('/todo-app');
     } catch (err) {
