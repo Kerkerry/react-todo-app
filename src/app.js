@@ -8,8 +8,10 @@ import TodoApp from "./pages/TodoApp";
 import CompletedTodos from "./pages/CompletedTodos";
 import InCompletedTodos from "./pages/InCompleteTodos";
 import Page404 from "./pages/404";
+import { useState } from 'react';
 
 const App = () => {
+    const [todos,setTodos]=useState([])
     return (
         <Router>
             <AuthProvider>
@@ -25,7 +27,7 @@ const App = () => {
                         */}
                         <Route element={<Layout />}>
                             {/* The index route renders for /todo-app */}
-                            <Route index element={<TodoApp />} />
+                            <Route index element={<TodoApp  data={{todos}}/>} />
                             
                             {/* Note the paths are relative, e.g., /todo-app/complete-todos */}
                             <Route path="complete-todos" element={<CompletedTodos />} />
