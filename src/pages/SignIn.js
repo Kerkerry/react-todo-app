@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AuthHeader from "./AuthHeader";
 import './TodosApp.css'
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthContext";
 // --- Sign-In Component ---
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate=useNavigate()
 
   // Handle the form submission
   const handleSignIn = (e) => {
@@ -16,17 +19,17 @@ const SignIn = () => {
     if (!email || !password) {
       setMessage('Email and password are required.');
       return;
+    }else if (email === 'user' && password === 'password') {
+      // login(); // Set authentication status
+      navigate('/completed-todos'); // Redirect to dashboard after login
+    } else {
+      alert('Invalid credentials');
     }
 
     // Placeholder for API call to backend
     console.log('Attempting to sign in with:', { email, password });
     setMessage('Sign in successful! Redirecting to dashboard...');
-
-    // In a real app, you would make an API call here.
-    // Example: fetch('/api/signin', { method: 'POST', body: JSON.stringify({ email, password }) })
-    // On success, you'd store a JWT token or user session and navigate to the dashboard.
     
-    // Clear form fields
     setEmail('');
     setPassword('');
   };
@@ -42,13 +45,13 @@ const SignIn = () => {
         />
         <form onSubmit={handleSignIn} className="auth-form">
           <div className="form-field-group">
-            <label className="form-label">Email address</label>
+            <label className="form-label">Username</label>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-input"
-              placeholder="you@example.com"
+              placeholder="username"
             />
           </div>
           <div className="form-field-group">

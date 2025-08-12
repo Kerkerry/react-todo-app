@@ -44,17 +44,17 @@ const SignUp = () => {
           title="Create an Account"
           subtitle="Already have an account?"
           linkText="Sign In"
-          linkTo="/sign-in"
+          linkTo="/"
         />
         <form onSubmit={handleSignUp} className="auth-form">
           <div className="form-field-group">
-            <label className="form-label">Email address</label>
+            <label className="form-label">Username</label>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-input"
-              placeholder="you@example.com"
+              placeholder="username"
             />
           </div>
           <div className="form-field-group">
