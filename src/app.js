@@ -14,18 +14,26 @@ import { api } from './AuthContext';
 const App = () => {
     const [todos,setTodos]=useState([])
     const [token,setToken]=useState(()=>localStorage.getItem('token'))
+    const [isLoading, setIsLoading] = useState(true);
 
-    const fetchTodos=async()=>{
-        try {
-           const {todos}=await api.get('/',token) 
-           setTodos(todos)
-        } catch (error) {
-            console.error(error);
-        }
-    }
     useEffect(()=>{
-        fetchTodos()
-    },[todos])
+        const fetchTodos=async()=>{
+            try {
+            const {todos}=await api.get('/',token) 
+            setTodos(todos)
+            setIsLoading(false);
+            } catch (error) {
+                console.error(error);
+                setIsLoading(false);
+            }
+        }
+        window.addEventListener('DOMContentLoaded',fetchTodos())
+    },[])
+ 
+    if(isLoading){
+        return <div>Loading...</div>;
+    }
+
     return (
         <Router>
             <AuthProvider>
@@ -44,8 +52,8 @@ const App = () => {
                             <Route index element={<TodoApp  todos={todos}/>} />
                             
                             {/* Note the paths are relative, e.g., /todo-app/complete-todos */}
-                            <Route path="complete-todos" element={<CompletedTodos />} />
-                            <Route path="incomplete-todos" element={<InCompletedTodos />} />
+                            <Route path="complete-todos" element={<CompletedTodos todos={todos}/>} />
+                            <Route path="incomplete-todos" element={<InCompletedTodos todos={todos}/>} />
                         </Route>
                     </Route>
 
