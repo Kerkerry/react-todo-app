@@ -35,7 +35,6 @@ export const api = {
         method:'PUT',
         headers:{
           'Content-Type':'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body:JSON.stringify(data)
       }
@@ -48,9 +47,11 @@ export const api = {
     const response=await fetch(
       `${API_URL}/${endpoint}`,
       {
-        method:'DELETE',
+      method:"DELETE",
+      headers: {
         'Authorization': `Bearer ${token}`
-      }
+      },
+    }
     )
     if (!response.ok) throw new Error('API request failed');
     return await response.json();
