@@ -1,5 +1,5 @@
 import './TodosApp.css'
-const CompletedTodos=({ todos, toggleTodoCompletion, deleteTodo })=>{
+const CompletedTodos=({ todos, toggleTodo, deleteTodo })=>{
    
     return (
     <div className="todo-container">
@@ -21,7 +21,7 @@ const CompletedTodos=({ todos, toggleTodoCompletion, deleteTodo })=>{
             {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
             </button> */}
-            <input type="checkbox" className="todo-checkbox" checked={todo.is_completed} onChange={() => toggleTodoCompletion(todo.id)}/>
+            <input type="checkbox" className="todo-checkbox" checked={todo.is_completed} onChange={() => toggleTodo(todo.id)}/>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}

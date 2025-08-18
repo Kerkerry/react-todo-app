@@ -27,8 +27,22 @@ const App = () => {
                 setIsLoading(false);
             }
         }
-        window.addEventListener('DOMContentLoaded',fetchTodos())
+        fetchTodos()
     },[])
+
+    const toggleTodo=async(id)=>{
+        try {
+            const todo=todos.filter(todo=>todo.id===id)
+            const response=await api.put(`toggle-todo`,todo,token)
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleDeleteTodo=()=>{
+
+    }
  
     if(isLoading){
         return <div>Loading...</div>;
@@ -49,11 +63,11 @@ const App = () => {
                         */}
                         <Route element={<Layout />}>
                             {/* The index route renders for /todo-app */}
-                            <Route index element={<TodoApp  todos={todos}/>} />
+                            <Route index element={<TodoApp  todos={todos} toggleTodo={toggleTodo}/>} />
                             
                             {/* Note the paths are relative, e.g., /todo-app/complete-todos */}
-                            <Route path="complete-todos" element={<CompletedTodos todos={todos}/>} />
-                            <Route path="incomplete-todos" element={<InCompletedTodos todos={todos}/>} />
+                            <Route path="complete-todos" element={<CompletedTodos todos={todos} toggleTodo={toggleTodo}/>} />
+                            <Route path="incomplete-todos" element={<InCompletedTodos todos={todos} toggleTodo={toggleTodo}/>} />
                         </Route>
                     </Route>
 

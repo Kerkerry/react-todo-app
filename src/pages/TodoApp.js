@@ -1,6 +1,6 @@
 import { useState } from "react"
 import './TodosApp.css'
-const TodoApp=({todos, addTodo, toggleTodoCompletion, deleteTodo })=>{
+const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
 
 
     const [newTodoTaskName, setNewTodoTaskName] = useState('');
@@ -91,7 +91,7 @@ const TodoApp=({todos, addTodo, toggleTodoCompletion, deleteTodo })=>{
             {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
             </button> */}
-            <input type="checkbox" className="todo-checkbox" checked={todo.is_completed} onChange={() => toggleTodoCompletion(todo.id)}/>
+            <input type="checkbox" className="todo-checkbox" checked={todo.is_completed} onChange={() => toggleTodo(todo.id)}/>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}

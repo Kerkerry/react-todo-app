@@ -17,6 +17,7 @@ export const api = {
     if (!response.ok) throw new Error('API request failed');
     return await response.json();
   },
+
   post: async (endpoint, data) => {
     const response = await fetch(`${API_URL}/${endpoint}`, {
       method: 'POST',
@@ -26,6 +27,34 @@ export const api = {
     if (!response.ok) throw new Error('API request failed');
     return await response.json();
   },
+
+  put:async(endpoint,data,token)=>{    
+    const response=await fetch(
+      `${API_URL}/${endpoint}`,
+      {
+        method:'PUT',
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body:JSON.stringify(data)
+      }
+    );
+    if (!response.ok) throw new Error('API request failed');
+    return await response.json();
+  },
+
+  delete:async(endpoint,id)=>{
+    const response=await fetch(
+      `${API_URL}/${endpoint}/${id}`,
+      {
+        method:'DELETE',
+      }
+    )
+    if (!response.ok) throw new Error('API request failed');
+    return await response.json();
+  },
+
   authenticatedRequest: async (method, endpoint, token, data = null) => {
     const options = {
       method,
