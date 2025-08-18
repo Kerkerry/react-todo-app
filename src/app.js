@@ -15,7 +15,6 @@ const App = () => {
     const [todos,setTodos]=useState([])
     const [token,setToken]=useState(()=>localStorage.getItem('token'))
     const [isLoading, setIsLoading] = useState(true);
-
     useEffect(()=>{
         const fetchTodos=async()=>{
             try {
@@ -34,14 +33,23 @@ const App = () => {
         try {
             const todo=todos.filter(todo=>todo.id===id)
             const response=await api.put(`toggle-todo`,todo,token)
-            console.log(response);
+            
         } catch (error) {
             console.error(error);
         }
     }
 
-    const handleDeleteTodo=()=>{
+    const completedTodos=()=>{
+        return todos.map(todo=>todo.is_completed===true)
+    }
 
+    const deleteTodo=async(id)=>{
+        try {
+            const response=await api.delete(`delete-todo/${id}`,token)
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
     }
  
     if(isLoading){
@@ -63,11 +71,11 @@ const App = () => {
                         */}
                         <Route element={<Layout />}>
                             {/* The index route renders for /todo-app */}
-                            <Route index element={<TodoApp  todos={todos} toggleTodo={toggleTodo}/>} />
+                            <Route index element={<TodoApp  todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>} />
                             
                             {/* Note the paths are relative, e.g., /todo-app/complete-todos */}
-                            <Route path="complete-todos" element={<CompletedTodos todos={todos} toggleTodo={toggleTodo}/>} />
-                            <Route path="incomplete-todos" element={<InCompletedTodos todos={todos} toggleTodo={toggleTodo}/>} />
+                            <Route path="complete-todos" element={<CompletedTodos todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>} />
+                            <Route path="incomplete-todos" element={<InCompletedTodos todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>} />
                         </Route>
                     </Route>
 

@@ -44,11 +44,12 @@ export const api = {
     return await response.json();
   },
 
-  delete:async(endpoint,id)=>{
+  delete:async(endpoint,token)=>{
     const response=await fetch(
-      `${API_URL}/${endpoint}/${id}`,
+      `${API_URL}/${endpoint}`,
       {
         method:'DELETE',
+        'Authorization': `Bearer ${token}`
       }
     )
     if (!response.ok) throw new Error('API request failed');

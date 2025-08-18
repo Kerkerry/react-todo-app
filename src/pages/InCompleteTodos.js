@@ -1,11 +1,12 @@
 
 import './TodosApp.css'
 const InCompletedTodos=({ todos, toggleTodoCompletion, deleteTodo })=>{
+  const incompletetodos=todos.filter(todo=>todo.is_completed===false)
     return (
     <div className="todo-container">
       <h1>Incomplete Todos</h1>
       <ul className="todo-list">
-        {todos.map(todo => (
+        {incompletetodos.map(todo => (
           <li
             key={todo.id}
             className={`todo-item ${todo.is_completed ? 'completed' : ''}`}

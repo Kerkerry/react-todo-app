@@ -1,11 +1,13 @@
 import './TodosApp.css'
+import { useState,useEffect } from 'react';
 const CompletedTodos=({ todos, toggleTodo, deleteTodo })=>{
-   
+    const completedTodos=todos.filter(todo=>todo.is_completed===true)
+    
     return (
     <div className="todo-container">
       <h1>Incomplete Todos</h1>
       <ul className="todo-list">
-        {todos.map(todo => (
+        {completedTodos.map(todo => (
           <li
             key={todo.id}
             className={`todo-item ${todo.is_completed ? 'completed' : ''}`}
