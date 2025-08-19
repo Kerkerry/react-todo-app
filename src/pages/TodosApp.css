@@ -472,6 +472,7 @@ body {
   color: #333;
 }
 
+
 /* Responsive adjustments */
 @media (min-width: 480px) {
   .add-todo-form {

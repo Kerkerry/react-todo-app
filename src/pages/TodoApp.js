@@ -1,6 +1,6 @@
 import { useState } from "react"
 import './TodosApp.css'
-import { api } from "../AuthContext";
+import { api } from "./data/api"
 const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
 
     const [token,setToken]=useState(()=>localStorage.getItem('token'))
@@ -135,6 +135,7 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
                 Due: {todo.due_date} | Priority: {todo.priority} | Category: {todo.category}
               </span>
             </div>
+           
             {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
               {todo.isCompleted ? 'Unmark' : 'Complete'}
             </button> */}

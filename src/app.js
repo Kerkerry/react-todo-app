@@ -9,7 +9,7 @@ import CompletedTodos from "./pages/CompletedTodos";
 import InCompletedTodos from "./pages/InCompleteTodos";
 import Page404 from "./pages/404";
 import { useEffect, useState } from 'react';
-import { api } from './AuthContext';
+import { api } from './pages/data/api';
 
 const App = () => {
     const [todos,setTodos]=useState([])
