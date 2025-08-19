@@ -45,12 +45,7 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
     // Define available options
     const priorityOptions = ['High', 'Medium', 'Low'];
     const categoryOptions = ['General', 'Work', 'Personal', 'Shopping', 'Health', 'Learning']; // NEW: Categories
-    const tagsOptions=['Work',
-    'Personal',
-    'Shopping',
-    'Fitness',
-    'Finance',
-    'Study','Home','Office','Computer','Errand','Urgent', 'Waiting','Backlog','Research','Coding','Writng']
+    const tagsOptions=['Work','Personal','Shopping','Fitness','Finance','Study','Home','Office','Computer','Errand','Urgent', 'Waiting','Backlog','Research','Coding','Writng']
     return (
     <div className="todo-container">
       <h1>All Todos Currently</h1>
