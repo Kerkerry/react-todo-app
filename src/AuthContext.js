@@ -18,10 +18,13 @@ export const api = {
     return await response.json();
   },
 
-  post: async (endpoint, data) => {
+  post: async (endpoint, data,token) => {
     const response = await fetch(`${API_URL}/${endpoint}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      },
       body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error('API request failed');

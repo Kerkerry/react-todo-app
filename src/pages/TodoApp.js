@@ -1,13 +1,15 @@
 import { useState } from "react"
 import './TodosApp.css'
+import { api } from "../AuthContext";
 const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
 
-
+    const [token,setToken]=useState(()=>localStorage.getItem('token'))
     const [newTodoTaskName, setNewTodoTaskName] = useState('');
     const [newTodoDescription, setNewTodoDescription] = useState('');
     const [newTodoPriority, setNewTodoPriority] = useState('Medium'); // Default to Medium
     const [newTodoCategory, setNewTodoCategory] = useState('General'); // NEW STATE: Default to General
     const [selectedTags,setSelectedTags]=useState([]);
+    const [selectedDate, setSelectedDate] = useState('');
 
     const handleCheckboxChange = (event) => {
         const { value, checked } = event.target;
@@ -16,17 +18,28 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
         );
       };
 
-    const handSubmit=(e)=>{
+    const handleDateChange = (event) => {
+        setSelectedDate(event.target.value);
+      };
+
+    const handSubmit=async(e)=>{
         e.preventDefault();
-        if (newTodoTaskName.trim()) { // Check if task name is not empty
-          // MODIFIED: Pass all form states to addTodo
-          addTodo(newTodoTaskName.trim(), newTodoDescription.trim(), newTodoPriority, newTodoCategory);
-          // Reset form fields
-          setNewTodoTaskName('');
-          setNewTodoDescription('');
-          setNewTodoPriority('Medium');
-          setNewTodoCategory('General');
+       try {
+         const task={
+          'task_name':newTodoTaskName,
+          'description':newTodoDescription,
+          'is_completed':false,
+          'priority':newTodoPriority,
+          'category':newTodoCategory,
+          'tags':selectedTags,
+          'due_date':selectedDate
         }
+        const response=await api.post('add-todo',task,token)
+        console.log(response);
+       } catch (error) {
+        console.error(error);
+       }
+        
     }
 
     // Define available options
@@ -36,7 +49,6 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
     'Personal',
     'Shopping',
     'Fitness',
-    'Home',
     'Finance',
     'Study','Home','Office','Computer','Errand','Urgent', 'Waiting','Backlog','Research','Coding','Writng']
     return (
@@ -82,6 +94,7 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
+        {/* Tags */}
          <div className="tags-container">
             <h3>Tags</h3>
             <div className="checkbox-grid">
@@ -92,13 +105,23 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
                     id={tag}
                     name={tag}
                     value={tag}
-                    // checked={selectedTags.includes(tag)}
-                    // onChange={handleCheckboxChange}
+                    checked={selectedTags.includes(tag)}
+                    onChange={handleCheckboxChange}
                   />
                   <label htmlFor={tag}>{tag}</label>
                 </div>
               ))}
             </div>
+          </div>
+{/* Due date */}
+          <div className="date-input-container">
+            <label htmlFor="dueDate">Due Date</label>
+            <input 
+              type="date" 
+              id="dueDate" 
+              value={selectedDate} 
+              onChange={handleDateChange} 
+            />
           </div>
         <button type="submit">Add Todo</button>
       </form>
