@@ -39,9 +39,6 @@ const App = () => {
         }
     }
 
-    const completedTodos=()=>{
-        return todos.map(todo=>todo.is_completed===true)
-    }
 
     const deleteTodo=async(id)=>{
         try {

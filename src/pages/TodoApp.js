@@ -7,9 +7,15 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
     const [newTodoDescription, setNewTodoDescription] = useState('');
     const [newTodoPriority, setNewTodoPriority] = useState('Medium'); // Default to Medium
     const [newTodoCategory, setNewTodoCategory] = useState('General'); // NEW STATE: Default to General
+    const [selectedTags,setSelectedTags]=useState([]);
 
+    const handleCheckboxChange = (event) => {
+        const { value, checked } = event.target;
+        setSelectedTags(prevTags => 
+          checked ? [...prevTags, value] : prevTags.filter(tag => tag !== value)
+        );
+      };
 
-    
     const handSubmit=(e)=>{
         e.preventDefault();
         if (newTodoTaskName.trim()) { // Check if task name is not empty
@@ -26,7 +32,13 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
     // Define available options
     const priorityOptions = ['High', 'Medium', 'Low'];
     const categoryOptions = ['General', 'Work', 'Personal', 'Shopping', 'Health', 'Learning']; // NEW: Categories
-
+    const tagsOptions=['Work',
+    'Personal',
+    'Shopping',
+    'Fitness',
+    'Home',
+    'Finance',
+    'Study','Home','Office','Computer','Errand','Urgent', 'Waiting','Backlog','Research','Coding','Writng']
     return (
     <div className="todo-container">
       <h1>All Todos Currently</h1>
@@ -70,7 +82,24 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-
+         <div className="tags-container">
+            <h3>Tags</h3>
+            <div className="checkbox-grid">
+              {tagsOptions.map((tag, index) => (
+                <div key={index} className="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id={tag}
+                    name={tag}
+                    value={tag}
+                    // checked={selectedTags.includes(tag)}
+                    // onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={tag}>{tag}</label>
+                </div>
+              ))}
+            </div>
+          </div>
         <button type="submit">Add Todo</button>
       </form>
 

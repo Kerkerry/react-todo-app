@@ -411,6 +411,42 @@ body {
   box-shadow: 0 0 0 1px #4f46e5, 0 0 0 1px #6366f1;
 }
 
+.tags-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 100%;
+  margin: 20px auto;
+}
+
+.tags-container h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.checkbox-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adds space between checkboxes */
+}
+
+.checkbox-item {
+  /* This ensures that items take up roughly half the container width,
+     forcing them into two columns */
+  flex: 1 1 1 50%; 
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.checkbox-item label {
+  cursor: pointer;
+}
+
 /* Responsive adjustments */
 @media (min-width: 480px) {
   .add-todo-form {
