@@ -1,5 +1,4 @@
 import './TodosApp.css'
-import { useState,useEffect } from 'react';
 const CompletedTodos=({ todos, toggleTodo, deleteTodo })=>{
     const completedTodos=todos.filter(todo=>todo.is_completed===true)
     

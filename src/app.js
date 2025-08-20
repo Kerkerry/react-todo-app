@@ -10,6 +10,8 @@ import InCompletedTodos from "./pages/InCompleteTodos";
 import Page404 from "./pages/404";
 import { useEffect, useState } from 'react';
 import { api } from './pages/data/api';
+import { API_URL } from './pages/data/api';
+import { io } from 'socket.io-client';
 
 // https://stytch.com/docs/b2b/guides/oauth/initial-setup#note-your-stytch-project's-subdomain
 
@@ -17,8 +19,8 @@ const App = () => {
     const [todos,setTodos]=useState([])
     const [token,setToken]=useState(()=>localStorage.getItem('token'))
     const [isLoading, setIsLoading] = useState(true);
-    useEffect(()=>{
-        const fetchTodos=async()=>{
+
+    const fetchTodos=async()=>{
             try {
             const {todos}=await api.get('/',token) 
             setTodos(todos)
@@ -27,8 +29,28 @@ const App = () => {
                 console.error(error);
                 setIsLoading(false);
             }
-        }
+    }
+    useEffect(()=>{
+        const socket=io(API_URL)
         fetchTodos()
+
+        // Listen for real-time events from the backend
+        // 1. New todo
+        socket.on('todo_created',(newTodo)=>{
+            fetchTodos()
+        })
+
+        // 2. Updated todo
+        socket.on('todo_deleted',(deletedId)=>{
+            fetchTodos()
+        })
+
+        // 3. Updated todo
+        socket.on('todo_changed',(updatedTodo)=>{
+            fetchTodos()
+        })
+
+
     },[])
 
     const toggleTodo=async(id)=>{

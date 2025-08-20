@@ -3,7 +3,7 @@
 // =======================================================================
 
 // !!! IMPORTANT: Replace this URL with your actual Node.js backend URL.
-const API_URL = 'http://localhost:3100';
+export const API_URL = 'http://localhost:3100';
 export const api = {
   get: async (endpoint, token) => {
     const response = await fetch(`${API_URL}/${endpoint}`, {
