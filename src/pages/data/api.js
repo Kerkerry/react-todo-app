@@ -59,17 +59,4 @@ export const api = {
     return await response.json();
   },
 
-  authenticatedRequest: async (method, endpoint, token, data = null) => {
-    const options = {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: data ? JSON.stringify(data) : null,
-    };
-    const response = await fetch(`${API_URL}/${endpoint}`, options);
-    if (!response.ok) throw new Error('API request failed');
-    return await response.json();
-  }
 };

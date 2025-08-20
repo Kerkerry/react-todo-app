@@ -1,40 +1,34 @@
 import { useState } from "react";
 import AuthHeader from "./AuthHeader";
 import './TodosApp.css'
+import { api } from "./data/api";
 // --- Sign-Up Component ---
 const SignUp = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
 
   // Handle the form submission
-  const handleSignUp = (e) => {
+  const handleSignUp = async(e) => {
     e.preventDefault();
-    setMessage('');
-
-    // Simple client-side validation
-    if (!email || !password || !confirmPassword) {
-      setMessage('All fields are required.');
-      return;
+    try {
+    if(username.length>1 || password.length>4 || (password===confirmPassword)){
+        const data={
+          'username':username,
+          'upassword':password
+        }
+        const response=await api.post('signup',data)
+        setUsername('');
+        setPassword('');
+        setConfirmPassword('');
+    }else{
+        setMessage('Check you details before submitting')
     }
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match.');
-      return;
+   
+    } catch (error) {
+      
     }
-
-    // Placeholder for API call to backend
-    console.log('Attempting to sign up with:', { email, password });
-    setMessage('Sign up successful! Redirecting to sign in...');
-    
-    // In a real app, you would make an API call here.
-    // Example: fetch('/api/signup', { method: 'POST', body: JSON.stringify({ email, password }) })
-    // On success, you'd navigate to the sign-in page or the app dashboard.
-
-    // Clear form fields
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
   };
 
   return (
@@ -51,8 +45,8 @@ const SignUp = () => {
             <label className="form-label">Username</label>
             <input
               type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="form-input"
               placeholder="username"
             />

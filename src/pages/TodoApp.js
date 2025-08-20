@@ -25,17 +25,18 @@ const TodoApp=({todos, addTodo, toggleTodo, deleteTodo })=>{
     const handSubmit=async(e)=>{
         e.preventDefault();
        try {
-         const task={
-          'task_name':newTodoTaskName,
-          'description':newTodoDescription,
-          'is_completed':false,
-          'priority':newTodoPriority,
-          'category':newTodoCategory,
-          'tags':selectedTags,
-          'due_date':selectedDate
-        }
-        const response=await api.post('add-todo',task,token)
-        console.log(response);
+         if(newTodoTaskName.length>=1 || newTodoDescription>=1 || selectedDate===''){
+              const task={
+              'task_name':newTodoTaskName,
+              'description':newTodoDescription,
+              'is_completed':false,
+              'priority':newTodoPriority,
+              'category':newTodoCategory,
+              'tags':selectedTags,
+              'due_date':selectedDate
+            }
+            await api.post('add-todo',task,token)
+         }
        } catch (error) {
         console.error(error);
        }
