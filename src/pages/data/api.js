@@ -36,6 +36,7 @@ export const api = {
         method:'PUT',
         headers:{
           'Content-Type':'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body:JSON.stringify(data)
       }

@@ -11,6 +11,8 @@ import Page404 from "./pages/404";
 import { useEffect, useState } from 'react';
 import { api } from './pages/data/api';
 
+// https://stytch.com/docs/b2b/guides/oauth/initial-setup#note-your-stytch-project's-subdomain
+
 const App = () => {
     const [todos,setTodos]=useState([])
     const [token,setToken]=useState(()=>localStorage.getItem('token'))
