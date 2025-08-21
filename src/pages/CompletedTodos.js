@@ -12,18 +12,31 @@ const CompletedTodos=({ todos, toggleTodo, deleteTodo })=>{
             className={`todo-item ${todo.is_completed ? 'completed' : ''}`}
             data-priority={todo.priority}
           >
-            <div className="todo-item-content">
-              <span className="todo-item-name">{todo.task_name}</span>
-              {todo.description && <span className="todo-item-description">{todo.description}</span>}
-              <span className="todo-item-meta">
-                Due: {todo.due_date} | Priority: {todo.priority} | Category: {todo.category}
-              </span>
+            <div class="todo-item-header">
+              <h3 class="todo-item-name">{todo.task_name}</h3>
+              <div class="todo-item-actions">
+                <input
+                  type="checkbox"
+                  class="todo-checkbox"
+                  checked={todo.is_completed}
+                  onChange={() => toggleTodo(todo.id)}
+                />
+                <button class="delete-btn" onClick={() => deleteTodo(todo.id)}>Delete</button>
+              </div>
             </div>
-            {/* <button onClick={() => toggleTodoCompletion(todo.id)}>
-              {todo.isCompleted ? 'Unmark' : 'Complete'}
-            </button> */}
-            <input type="checkbox" className="todo-checkbox" checked={todo.is_completed} onChange={() => toggleTodo(todo.id)}/>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            
+            <div class="todo-item-details">
+              <p class="todo-item-description">{todo.description}</p>
+              <div class="todo-item-meta">
+                <span class="meta-info">Due: {todo.due_date}</span>
+                <span class="meta-info">Priority: {todo.priority}</span>
+                <span class="meta-info">Category: {todo.category}</span>
+              </div>
+            </div>
+
+            <div class="todo-item-tags">
+              {todo.tags.map(tag=><span class="tag">{tag}</span>)}
+            </div>
           </li>
         ))}
       </ul>

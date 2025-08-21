@@ -189,7 +189,7 @@ body {
 
 
 /* Action Buttons within Todo Item */
-.todo-item button {
+/* .todo-item button {
   padding: 8px 12px;
   border: none;
   border-radius: 6px;
@@ -197,26 +197,26 @@ body {
   font-size: 0.9em;
   font-weight: 500;
   transition: background-color 0.3s ease;
-  white-space: nowrap; /* Prevent buttons from wrapping */
-}
+  white-space: nowrap; 
+} */
 
-.todo-item button:nth-of-type(1) { /* Complete/Unmark button */
-  background-color: #2196F3; /* Blue */
+/* .todo-item button:nth-of-type(1) 
+  background-color: #2196F3; 
   color: white;
-}
+} */
 
-.todo-item button:nth-of-type(1):hover {
-  background-color: #1976D2; /* Darker blue */
-}
+/* .todo-item button:nth-of-type(1):hover {
+  background-color: #1976D2; 
+} */
 
-.todo-item button:nth-of-type(2) { /* Delete button */
-  background-color: #f44336; /* Red */
+/* .todo-item button:nth-of-type(2) 
+  background-color: #f44336; 
   color: white;
 }
 
 .todo-item button:nth-of-type(2):hover {
-  background-color: #d32f2f; /* Darker red */
-}
+  background-color: #d32f2f;
+} */
 
 /* Optional: Info text at the bottom */
 .info-text {
@@ -447,6 +447,136 @@ body {
   cursor: pointer;
 }
 
+
+/* General container for the list */
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Base style for a single todo item */
+.todo-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-left: 5px solid #ccc; /* Default border color */
+}
+
+/* Hover effect */
+.todo-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Styles for the header section */
+.todo-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.todo-item-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.todo-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Styles for the delete button */
+.delete-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #ff7875;
+}
+
+/* Styles for the main details section */
+.todo-item-details {
+  margin-bottom: 1rem;
+}
+
+.todo-item-description {
+  font-style: italic;
+  color: #666;
+  margin: 0 0 0.5rem 0;
+}
+
+.todo-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.meta-info {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Styles for tags */
+.todo-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Visual cues based on priority */
+.todo-item[data-priority="High"] {
+  border-left-color: #e74c3c;
+}
+
+.todo-item[data-priority="Medium"] {
+  border-left-color: #f1c40f;
+}
+
+.todo-item[data-priority="Low"] {
+  border-left-color: #2ecc71;
+}
+
+/* Visual cue for completed tasks */
+.todo-item.completed {
+  background-color: #f0f0f0;
+  opacity: 0.7;
+  border-left-color: #aaa;
+}
+
+.todo-item.completed .todo-item-name {
+  text-decoration: line-through;
+  color: #aaa;
+}
 /* ... (existing CSS for .tags-container, .checkbox-grid, .submit-button, etc.) ... */
 
 .date-input-container {
